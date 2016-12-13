@@ -14,9 +14,9 @@ __author__ = 'kingname'
 
 class MarkrdownPicPicker(object):
 
-    def __init__(self, link_only=False):
+    def __init__(self, link_only=False, picture_folder='pic'):
         self.cwd = ''
-        self.picture_folder = 'pic'
+        self.picture_folder = picture_folder
         self.picture_suffix = 'png'
         self.picture_host = ''
         self.uploader = None
@@ -50,6 +50,7 @@ class MarkrdownPicPicker(object):
                                            globals(), locals(), ['Uploader'], 0).Uploader(self.uploader_info)
 
         if not os.path.exists(self.picture_folder):
+	    print("new pic folder")
             os.makedirs(self.picture_folder)
         self.imageGrab = ImageGrab(self.picture_folder, self.picture_suffix) if ImageGrab else None
         if not self.imageGrab:
@@ -61,7 +62,8 @@ class MarkrdownPicPicker(object):
         if not picture_path:
             return False
         else:
-            self.uploader.upload(picture_path, link_only=True if self.link_only else False)
+	    #    self.uploader.upload(picture_path, link_only=True if self.link_only else False)
+	    print("save picture done")
             return True
 
     def _find_uploader(self):
@@ -75,8 +77,11 @@ class MarkrdownPicPicker(object):
         exit()
 
 if __name__ == '__main__':
-    arg = sys.argv[-1]
-    if arg == '-linkonly':
-        MarkrdownPicPicker(link_only=True)
+    print sys.argv
+    if sys.argv[1] == '-linkonly':
+	MarkrdownPicPicker(link_only=True)
+    elif sys.argv[1] == '-pic_path':
+    	print(sys.argv[2])
+	MarkrdownPicPicker(picture_folder=sys.argv[2])
     else:
-        MarkrdownPicPicker()
+	MarkrdownPicPicker()

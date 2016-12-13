@@ -1,2 +1,2 @@
 #! /bin/bash
-python MarkdownPicPicker.py
+python MarkdownPicPicker.py -pic_path $1

@@ -14,7 +14,7 @@ class OSXGrab(object):
         try:
             os.system('/usr/local/bin/pngpaste {}'.format(picture_path))
             if os.path.exists(picture_path):
-                print('get image from pasteboard success.')
+		#print('get image from pasteboard success.')
                 return picture_path
             else:
                 print('there is no picture in clipboard!')
